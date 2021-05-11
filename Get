@@ -1,0 +1,18 @@
+ function getListItemsfromList() {
+            let listName = "List"
+
+            $.ajax({
+                url: _spPageContextInfo.siteAbsoluteUrl + "/_api/web/lists/getbytitle('" + listName + "')/items",
+                type: "GET",
+                headers:
+                {
+                    "Accept": "application/json;odata=verbose"
+                },
+                success: function (data) {
+                    console.log(data.d.results);
+                },
+                error: function (data) {
+                    alert(JSON.stringify(error));
+                }
+            });
+        }

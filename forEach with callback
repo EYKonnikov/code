@@ -24,8 +24,6 @@ array.forEachWithCallback((el, i, next) => {
 
 
 // With Promises
-const array = [1, 2, 3, 4, 5];
-
 array.forEachWithCallback((el, i, next) => {
     request({
         method: 'GET',

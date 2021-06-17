@@ -11,7 +11,7 @@
                 success: function (data) {
                     console.log(data.d.results);
                 },
-                error: function (data) {
+                error: function (error) {
                     alert(JSON.stringify(error));
                 }
             });
@@ -21,7 +21,7 @@
 	
 function getListItems() {
 
-	let init = { 
+let init = { 
 	method: 'GET',
 	headers: {'X-RequestDigest': document.getElementById('__REQUESTDIGEST').value,
 	'Accept': 'application/json; odata=verbose'},

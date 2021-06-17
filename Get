@@ -17,7 +17,11 @@
             });
         }
         
-let init = { 
+	
+	
+function getListItems() {
+
+	let init = { 
 	method: 'GET',
 	headers: {'X-RequestDigest': document.getElementById('__REQUESTDIGEST').value,
 	'Accept': 'application/json; odata=verbose'},
@@ -38,3 +42,6 @@ fetch(_spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/GetByTitle('Projektau
 }).catch(function(error) {
 	// Error handling code goes here
 })
+
+}
+

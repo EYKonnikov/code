@@ -16,3 +16,25 @@
                 }
             });
         }
+        
+let init = { 
+	method: 'GET',
+	headers: {'X-RequestDigest': document.getElementById('__REQUESTDIGEST').value,
+	'Accept': 'application/json; odata=verbose'},
+	credentials: 'same-origin'
+}
+
+fetch(_spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/GetByTitle('Projektaufgaben')/items", init).then(function(response) {
+	if (response.ok) {
+		return response.json();
+	}
+	else {
+		throw new Error('Network response was not ok.');
+	}
+}).then(function(data) {
+	
+		console.log(data);
+	
+}).catch(function(error) {
+	// Error handling code goes here
+})

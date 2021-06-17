@@ -1,3 +1,195 @@
+// Fetch
+
+function getListItem(listName) {
+
+            let list = listName;
+
+            let init = {
+                method: 'GET',
+                headers: {
+                    'X-RequestDigest': document.getElementById('__REQUESTDIGEST').value,
+                    'Accept': 'application/json; odata=verbose'
+                },
+                credentials: 'include'
+            }
+
+            fetch(_spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/GetByTitle('" + list + "')/items", init).then(function (response) {
+                if (response.ok) {
+                    return response.json();
+                }
+                else {
+                    throw new Error('Network response was not ok.');
+                }
+            }).then(function (data) {
+
+                console.log(list, data);
+
+            }).catch(function (error) {
+
+            })
+
+        }
+
+        function createListItem(listName) {
+
+            let list = listName;
+
+            let init = {
+                method: 'GET',
+                headers: {
+                    'X-RequestDigest': document.getElementById('__REQUESTDIGEST').value,
+                    'Accept': 'application/json; odata=verbose'
+                },
+                credentials: 'include'
+            }
+
+            fetch(_spPageContextInfo.webAbsoluteUrl + "/_api/lists/getbytitle('" + list + "')?$select=ListItemEntityTypeFullName", init).then(function (response) {
+
+                if (response.ok) {
+                    return response.json();
+                }
+                else {
+                    throw new Error('Network response was not ok.');
+                }
+            }).then(function (data) {
+
+                let metadata = {
+                    Title: 'New List Item',
+                    __metadata: {
+                        type: data.d.ListItemEntityTypeFullName
+                    }
+                }
+
+                let init = {
+                    method: 'POST',
+                    headers: {
+                        'X-RequestDigest': document.getElementById('__REQUESTDIGEST').value,
+                        'Accept': 'application/json; odata=verbose',
+                        'Content-Type': 'application/json; odata=verbose'
+                    },
+                    credentials: 'include',
+                    body: JSON.stringify(metadata)
+                }
+
+                return fetch(_spPageContextInfo.webAbsoluteUrl + "/_api/lists/getbytitle('" + list + "')/items", init);
+
+            }).then(function (response) {
+
+                if (response.ok) {
+
+                    console.log('Item created!')
+                }
+                else {
+                    throw new Error('Network response was not ok.');
+                }
+            }).catch(function (error) {
+
+                console.error(error);
+
+            })
+        };
+
+
+        function updateListItem(listName, itemId) {
+
+            let list = listName;
+            let id = itemId;
+
+            let init = {
+                method: 'GET',
+                headers: {
+                    'X-RequestDigest': document.getElementById('__REQUESTDIGEST').value,
+                    'Accept': 'application/json; odata=verbose'
+                },
+                credentials: 'include'
+            }
+
+            fetch(_spPageContextInfo.webAbsoluteUrl + "/_api/lists/getbytitle('" + list + "')/Items(" + id + ")", init).then(function (response) {
+                if (response.ok) {
+                    return response.json();
+                }
+                else {
+                    throw new Error('Network response was not ok.');
+                }
+            }).then(function (data) {
+
+                let metadata = {
+                    Title: 'Updated List Item',
+                    __metadata: {
+                        type: data.d.__metadata.type
+                    }
+                }
+
+                let init = {
+                    method: 'POST',
+                    headers: {
+                        'X-RequestDigest': document.getElementById('__REQUESTDIGEST').value,
+                        'Accept': 'application/json; odata=verbose',
+                        'Content-Type': 'application/json; odata=verbose',
+                        'X-HTTP-Method': 'MERGE',
+                        'If-Match': data.d.__metadata.etag
+                    },
+                    credentials: 'include',
+                    body: JSON.stringify(metadata)
+                }
+
+
+                return fetch(_spPageContextInfo.webAbsoluteUrl + "/_api/lists/getbytitle('" + list + "')/Items(" + id + ")", init);
+
+            }).then(function (response) {
+
+                if (response.ok) {
+
+                    console.log('Item updated.')
+                }
+                else {
+                    throw new Error('Network response was not ok.');
+                }
+            }).catch(function (error) {
+
+                console.error(error);
+
+            })
+        }
+
+        function deleteListItem(listName, itemId) {
+
+            let list = listName;
+            let id = itemId;
+
+            let init = {
+                method: 'POST',
+                headers: {
+                    'X-RequestDigest': document.getElementById('__REQUESTDIGEST').value,
+                    'Accept': 'application/json; odata=verbose',
+                    'X-HTTP-Method': 'DELETE',
+                    'If-Match': '*'
+                },
+                credentials: 'include'
+            }
+
+            fetch(_spPageContextInfo.webAbsoluteUrl + "/_api/lists/getbytitle('" + list + "')/Items(" + id + ")", init).then(function (response) {
+
+                if (response.ok) {
+
+                    console.log('Item deleted.')
+                }
+                else {
+                    throw new Error('Network response was not ok.');
+                }
+            }).catch(function (error) {
+
+                console.error(error);
+
+            })
+        } 
+ 
+ 
+ 
+ 
+ 
+ 
+ // Ajax
  function getListItemsfromList() {
             let listName = "List"
 
@@ -19,31 +211,6 @@
         
 	
 	
-function getListItems() {
 
-            let init = {
-                method: 'GET',
-                headers: {
-                    'X-RequestDigest': document.getElementById('__REQUESTDIGEST').value,
-                    'Accept': 'application/json; odata=verbose'
-                },
-                credentials: 'same-origin'
-            }
 
-            fetch(_spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/GetByTitle('Projektaufgaben')/items", init).then(function (response) {
-                if (response.ok) {
-                    return response.json();
-                }
-                else {
-                    throw new Error('Network response was not ok.');
-                }
-            }).then(function (data) {
-
-                console.log(data);
-
-            }).catch(function (error) {
-                // Error handling code goes here
-            })
-
-        }
 

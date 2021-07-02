@@ -1,4 +1,40 @@
- //READ CREATE UPDATE DELETE
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+
+
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+
+
+
+        })
+
+
+
+
+
+
+
+
+
+        //READ CREATE UPDATE DELETE
 
         function getListItem(listName) {
 
@@ -658,31 +694,9 @@
                 if (theEvent.preventDefault) theEvent.preventDefault();
             }
         }
- 
- 
- 
- // Ajax
- function getListItemsfromList() {
-            let listName = "List"
-
-            $.ajax({
-                url: _spPageContextInfo.siteAbsoluteUrl + "/_api/web/lists/getbytitle('" + listName + "')/items",
-                type: "GET",
-                headers:
-                {
-                    "Accept": "application/json;odata=verbose"
-                },
-                success: function (data) {
-                    console.log(data.d.results);
-                },
-                error: function (error) {
-                    alert(JSON.stringify(error));
-                }
-            });
-        }
-        
-	
-	
 
 
+    </script>
+</body>
 
+</html>

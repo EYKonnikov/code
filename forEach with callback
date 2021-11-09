@@ -37,3 +37,27 @@ array.forEachWithCallback((el, i, next) => {
         console.error(err);
     });
 });
+
+-----------------------------------
+//Map
+
+const Fruits = [
+    {fruitId: 'abc', name: 'apple'},
+    {fruitId: 'abc', name: 'orange'},
+    {fruitId: 'def', name: 'mango'},
+    {fruitId: 'egt', name: 'pineapple'}
+  ]
+
+  const Juices = [
+    {juiceId: 'abc', customer: 'John'},
+    {juiceId: 'def', customer: 'Gaby'}
+  ]
+
+  let finalArray = []
+  Juices.map((juice) => {
+    Fruits.map((fruit) => {
+      if(juice.juiceId === fruit.fruitId){
+        finalArray.push({customer: juice.customer, fruit: fruit.name}) 
+      }
+    });
+  });

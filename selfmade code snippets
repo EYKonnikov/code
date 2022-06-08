@@ -19,21 +19,7 @@
 
 
 
-        document.addEventListener("DOMContentLoaded", function () {
-
-
-
-
-        })
-
-
-
-
-
-
-
-
-
+   
         //READ CREATE UPDATE DELETE
 
         function getListItem(listName) {
